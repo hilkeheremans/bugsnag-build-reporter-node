@@ -4,7 +4,7 @@ const logger = require('./lib/logger')
 
 module.exports = (build, opts) => {
   opts = opts || {}
-  const requestOptions = opts.requestOptions || {}
+  const proxy = opts.proxy
   const logLevel = opts.logLevel ? opts.logLevel : 'info'
   const log = opts.logger ? opts.logger : logger(logLevel)
   const path = opts.path ? opts.path : process.cwd()
@@ -28,7 +28,7 @@ module.exports = (build, opts) => {
     makePayload(build, path, log, (err, data) => {
       if (err) return onError(err)
       log.info('sending', data)
-      send(endpoint, data, onSuccess, onError, requestOptions)
+      send(endpoint, data, onSuccess, onError, { proxy })
     })
   })
 }
