@@ -21,6 +21,7 @@ const argv = meow(`
 
     --app-version-code, -c  Set the version code (Android only)
     --app-bundle-version, -b  Set the bundle version (iOS/macOS/tvOS only)
+    --proxy Use a proxy server to communicate with Bugsnag
 
     metadata
       Arbitrary "key=value" pairs will be passed to the build API as metadata
@@ -80,6 +81,9 @@ const argv = meow(`
     endpoint: {
       type: 'string',
       alias: 'u'
+    },
+    proxy: {
+      type: 'string',
     }
   }
 })
@@ -95,7 +99,7 @@ if (argv.flags.sourceControlProvider && argv.flags.sourceControlRepository && ar
 if (argv.flags.h === true) {
   argv.showHelp()
 } else {
-  require('../index')(argv.flags, { path: process.cwd(), endpoint: argv.flags.endpoint })
+  require('../index')(argv.flags, { path: process.cwd(), endpoint: argv.flags.endpoint, proxy: argv.flags.proxy })
     .then(() => {})
     .catch(() => { process.exitCode = 1 })
 }

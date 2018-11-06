@@ -56,6 +56,7 @@ reportBuild({ apiKey: 'YOUR_API_KEY', appVersion: '1.2.3' }, { /* opts */ })
   - `logger: object` provide a different logger object `{ debug, info, warn, error }`
   - `path: string` the path to search for source control info, defaults to `process.cwd()`
   - `endpoint: string` post the build payload to a URL other than the default (`https://build.bugsnag.com`)
+  - `proxy: string` use a proxy server to communicate with Bugsnag's server. Useful in some enterprise environments.
 
 #### CLI
 
